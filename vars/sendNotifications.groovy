@@ -39,8 +39,8 @@ def sendSlackMessage(channel, credentialsGroup, message, color) {
 	echo "Slack channel:" + channel
 	withCredentials([string(credentialsId: credentialsId + '-subdomain', variable: 'SLACK_TEAM_DOMAIN')]) {
 		withCredentials([string(credentialsId: credentialsId + '-url', variable: 'SLACK_BASE_URL')]) {
-			sh 'Slack URL: $SLACK_BASE_URL'
-			sh 'Slack team domain: $SLACK_TEAM_DOMAIN' 
+			sh "Slack URL: $SLACK_BASE_URL"
+			sh "Slack team domain: $SLACK_TEAM_DOMAIN"
 			slackSend (
 				baseUrl: env.SLACK_BASE_URL,
 				teamDomain: env.SLACK_TEAM_DOMAIN,

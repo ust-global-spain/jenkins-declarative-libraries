@@ -27,4 +27,20 @@ def call(String buildStatus = 'STARTED', String channel, String credentialsGroup
 	  colorCode = colorCodeGreen
 	}
 	echo colorCode
+	// Send notifications
+	sendSlackMessage (channel, credentialsGroup, summary, colorCode)
+
+}
+
+def sendSlackMessage(channel, credentialsGroup, message, color) {
+	credentialsId = 'slack-' + credentialsGroup+ '-' + channel
+	withCredentials([string(credentialsId: credentialsId + '-url', variable: 'SLACK_BASE_URL')]) {
+		slackSend (
+			baseUrl: env.SLACK_BASE_URL,
+			channel: channel,
+			tokenCredentialId: credentialsId + '-token',
+			color: color, 
+			message: message
+		)
+	}
 }

@@ -1,4 +1,6 @@
+vars/sendNotifications.groovy
 #!/usr/bin/env groovy
+
 
 colorCodeYellow = '#FFFF00'
 colorCodeGreen = '#00FF00'

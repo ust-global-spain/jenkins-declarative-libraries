@@ -7,7 +7,7 @@ colorCodeRed = '#FF0000'
 /**
  * Send notifications based on build status string
  */
-def call(String buildStatus = 'STARTED', channel, message) {
+def call(String buildStatus = 'STARTED', channel, credentialsGroup, message) {
   // build status of null means successful
   buildStatus = buildStatus ?: 'SUCCESS'
 
@@ -30,16 +30,17 @@ def call(String buildStatus = 'STARTED', channel, message) {
   }
 
   // Send notifications
-  sendSlackMessage (channel, summary, colorCode)
+  sendSlackMessage (channel, credentialsGroup, summary, colorCode)
 
  
 }
-def sendSlackMessage(channel, message, color) {
-	withCredentials([string(credentialsId: 'slack-devops-' + channel + '-url', variable: 'SLACK_BASE_URL')]) {
+def sendSlackMessage(channel, credentialsGroup, message, color) {
+	credentialsId = 'slack-' + credentialsGroup+ '-' + channel
+	withCredentials([string(credentialsId: credentialsId + '-url', variable: 'SLACK_BASE_URL')]) {
 		slackSend (
 			baseUrl: env.SLACK_BASE_URL,
 			channel: channel,
-			tokenCredentialId: 'slack-devops-' + channel + '-token',
+			tokenCredentialId: credentialsId + '-token',
 			color: color, 
 			message: message
 		)

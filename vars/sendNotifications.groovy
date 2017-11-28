@@ -5,6 +5,6 @@
 /**
  * Send notifications based on build status string
  */
-def call(String buildStatus = 'STARTED', String channel, String credentialsGroup, String message) {
+def call(buildStatus = 'STARTED', channel, credentialsGroup, message) {
 
 }

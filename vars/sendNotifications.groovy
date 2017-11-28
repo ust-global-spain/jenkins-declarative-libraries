@@ -1,4 +1,4 @@
-vars/sendNotifications.groovy
+//vars/sendNotifications.groovy
 #!/usr/bin/env groovy
 
 

@@ -24,6 +24,8 @@ def call(String buildStatus = 'STARTED', String channel, String credentialsGroup
 	  colorCode = colorCodeYellow
 	} else if (buildStatus == 'SUCCESS') {
 	  colorCode = colorCodeGreen
+	} else if (buildStatus == 'FAILURE') {
+	  colorCode = colorCodeRed
 	} else {
 	  colorCode = colorCodeGreen
 	}

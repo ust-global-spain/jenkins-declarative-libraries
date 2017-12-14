@@ -26,6 +26,7 @@ def call(String buildStatus = 'STARTED', String channel, String credentialsGroup
 	  colorCode = colorCodeGreen
 	} else if (buildStatus == 'FAILURE') {
 	  colorCode = colorCodeRed
+	  detailsSlack += "\n@channel"
 	} else {
 	  colorCode = colorCodeGreen
 	}

@@ -12,9 +12,9 @@ def call(String buildStatus = 'STARTED', String channel, String credentialsGroup
 
 
   // Default values
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def subject = "**${buildStatus}:** Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
   def summary = "${subject} (${env.BUILD_URL})"
-  def details = """<p>${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+  def details = """<p>**${buildStatus}:** Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
     <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""" + message
   def detailsCisco = "\n" + message
     
@@ -34,7 +34,7 @@ def sendWebexTeamsMessage(channel, credentialsGroup, message) {
     ]) {
       def http = new HTTPBuilder( 'https://api.ciscospark.com' )
       http.setHeaders([Authorization: 'Bearer ' + WEBEXTEAM_TOKEN])
-      def postBody = [roomId: ROOM_ID, text: message]
+      def postBody = [roomId: ROOM_ID, markdown: message]
  
       http.post( path: '/v1/messages', body: postBody,requestContentType: 'application/x-www-form-urlencoded' ) { 
          resp ->  println "POST Success: ${resp.statusLine}"
